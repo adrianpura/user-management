@@ -10,7 +10,7 @@ export class UserCreateSeed implements Seeder {
       last_name: 'admin',
       address: 'Pasig',
       post_code: 4412,
-      contact_number: 09112340221,
+      contact_number: 9112340221,
       email: 'admin@admin.com',
       username: 'admin',
       password: 'changeme',
