@@ -85,7 +85,7 @@ export class UsersService {
     };
   }
 
-  // async findOne(email: string): Promise<Users | undefined> {
-  //   return this.usersRepository.findOne(email);
-  // }
+  async findOne(username: string): Promise<Users | undefined> {
+    return this.usersRepository.findOne(username);
+  }
 }

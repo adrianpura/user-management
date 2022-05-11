@@ -21,7 +21,15 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { GetUsersFilterDto } from './dto/get-users-filter.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UsersService } from './users.service';
-import { ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiBody,
+  ApiCreatedResponse,
+  ApiParam,
+  ApiTags,
+} from '@nestjs/swagger';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { DeleteMultipleUserDto } from './dto/delete-multiple.dto';
 
 ApiTags('users');
 @Controller('users')
@@ -30,7 +38,7 @@ export class UsersController {
     private usersService: UsersService, // private configService: ConfigService,
   ) {}
 
-  @ApiCreatedResponse({ type: Users })
+  @ApiCreatedResponse({ type: Users, description: 'User Registration' })
   @Post()
   @UsePipes(ValidationPipe)
   createUser(@Body() createUserDto: CreateUserDto): Promise<any> {
@@ -38,17 +46,23 @@ export class UsersController {
   }
 
   @Patch()
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @UsePipes(ValidationPipe)
   updateUser(@Body() updateUserDto: UpdateUserDto): Promise<any> {
     return this.usersService.updateUser(updateUserDto);
   }
 
   @Delete('/:id')
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   deleteUser(@Param('id', ParseIntPipe) id: number): Promise<any> {
     return this.usersService.deleteUser(id);
   }
 
   @Get()
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   getUsers(
     @Query(ValidationPipe) filterDto: GetUsersFilterDto,
     @Query('page') page = 1,
@@ -73,6 +87,12 @@ export class UsersController {
   }
 
   @Post('deleteMultiple')
+  @ApiBody({
+    type: DeleteMultipleUserDto,
+    description: 'Delete Multiple Users',
+  })
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @UsePipes(ValidationPipe)
   deleteMultipleUser(@Req() req: Request): Promise<any> {
     return this.usersService.deleteMultipleUser(req);

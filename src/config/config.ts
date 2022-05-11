@@ -14,7 +14,7 @@ export const config = () => ({
     },
     keepConnectionAlive: true,
     synchronize: false,
-    logging: false,
+    logging: 'all',
     extra: {
       charset: 'utf8mb4_unicode_ci',
     },

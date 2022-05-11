@@ -40,10 +40,7 @@ export class UsersRepository extends Repository<Users> {
     user.username = username;
     user.address = address;
 
-    user.password = crypto
-      .createHash('sha256')
-      .update(password)
-      .digest('base64');
+    user.password = cipher.encrypt(password);
 
     try {
       await user.save();
@@ -147,11 +144,11 @@ export class UsersRepository extends Repository<Users> {
     return await paginate<Users>(query, options);
   }
 
-  // async findOne(email): Promise<Users> {
-  //   const query = this.createQueryBuilder('users');
+  async findOne(username): Promise<Users> {
+    const query = this.createQueryBuilder('users');
 
-  //   query.andWhere('users.email = :email', { email });
+    query.andWhere('users.username = :username', { username });
 
-  //   return await query.getOne();
-  // }
+    return await query.getOne();
+  }
 }

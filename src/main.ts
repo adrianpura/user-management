@@ -9,6 +9,7 @@ async function bootstrap() {
     .setTitle('User Management')
     .setDescription('Simple CRUD for managing users')
     .setVersion('1.0')
+    .addBearerAuth()
     .addTag('users')
     .build();
 

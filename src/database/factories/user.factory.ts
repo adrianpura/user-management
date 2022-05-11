@@ -25,9 +25,6 @@ define(Users, () => {
   user.contact_number = randNumber();
   user.email = randEmail();
   user.username = randUserName();
-  user.password = crypto
-    .createHash('sha256')
-    .update(randPassword())
-    .digest('base64');
+  user.password = cipher.encrypt(randPassword());
   return user;
 });

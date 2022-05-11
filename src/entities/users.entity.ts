@@ -9,39 +9,39 @@ import {
 
 @Entity()
 export class Users extends BaseEntity {
-  @ApiProperty()
+  @ApiProperty({ type: Number, description: 'id' })
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ApiProperty()
+  @ApiProperty({ type: String, description: 'First Name' })
   @Column()
   first_name: string;
 
-  @ApiProperty()
+  @ApiProperty({ type: String, description: 'Last Name' })
   @Column()
   last_name: string;
 
-  @ApiProperty()
+  @ApiProperty({ type: String, description: 'address' })
   @Column()
   address: string;
 
-  @ApiProperty()
+  @ApiProperty({ type: Number, description: 'Post Code' })
   @Column()
   post_code: number;
 
-  @ApiProperty()
+  @ApiProperty({ type: Number, description: 'Contact Number' })
   @Column()
   contact_number: number;
 
-  @ApiProperty()
+  @ApiProperty({ type: String, description: 'Email' })
   @Column({ type: 'varchar', nullable: false, unique: true })
   email: string;
 
-  @ApiProperty()
+  @ApiProperty({ type: String, description: 'username' })
   @Column({ type: 'varchar', nullable: false, unique: true })
   username: string;
 
-  @ApiProperty()
+  @ApiProperty({ type: String, description: 'Password' })
   @Column({ type: 'varchar', nullable: false })
   password: string;
 

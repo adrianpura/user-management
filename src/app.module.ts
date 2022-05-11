@@ -7,6 +7,7 @@ import { AppService } from './app.service';
 import { config } from './config/config';
 import { DatabaseConfig } from './config/database.config';
 import { UsersModule } from './modules/users/users.module';
+import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
   // imports: [TypeOrmModule.forRoot(config), UsersModule],
@@ -20,6 +21,7 @@ import { UsersModule } from './modules/users/users.module';
       useClass: DatabaseConfig,
     }),
     UsersModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
