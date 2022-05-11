@@ -3,7 +3,7 @@ import {
   paginate,
   Pagination,
 } from 'nestjs-typeorm-paginate';
-import { Users } from 'src/entities/users.entity';
+import { Users } from '../../entities/users.entity';
 import { EntityRepository, Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { GetUsersFilterDto } from './dto/get-users-filter.dto';
@@ -146,4 +146,12 @@ export class UsersRepository extends Repository<Users> {
 
     return await paginate<Users>(query, options);
   }
+
+  // async findOne(email): Promise<Users> {
+  //   const query = this.createQueryBuilder('users');
+
+  //   query.andWhere('users.email = :email', { email });
+
+  //   return await query.getOne();
+  // }
 }

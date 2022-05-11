@@ -10,7 +10,7 @@ import {
   randUserName,
   randZipCode,
 } from '@ngneat/falso';
-import { Users } from 'src/entities/users.entity';
+import { Users } from '../../entities/users.entity';
 import { define } from 'typeorm-seeding';
 const aes256 = require('aes256');
 import * as crypto from 'crypto';

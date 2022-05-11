@@ -1,4 +1,4 @@
-import { Users } from 'src/entities/users.entity';
+import { Users } from '../../entities/users.entity';
 import { Connection, getManager } from 'typeorm';
 import { Factory, Seeder } from 'typeorm-seeding';
 
@@ -15,6 +15,6 @@ export class UserCreateSeed implements Seeder {
       username: 'admin',
       password: 'changeme',
     });
-    await factory(Users)().createMany(50);
+    // await factory(Users)().createMany(50);
   }
 }

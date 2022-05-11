@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { IPaginationOptions, Pagination } from 'nestjs-typeorm-paginate';
-import { Users } from 'src/entities/users.entity';
+import { Users } from '../../entities/users.entity';
 import { GetUsersFilterDto } from './dto/get-users-filter.dto';
 import { UsersRepository } from './users.repository';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -84,4 +84,8 @@ export class UsersService {
       data: [],
     };
   }
+
+  // async findOne(email: string): Promise<Users | undefined> {
+  //   return this.usersRepository.findOne(email);
+  // }
 }

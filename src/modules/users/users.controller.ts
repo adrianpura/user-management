@@ -9,24 +9,28 @@ import {
   Post,
   Query,
   Req,
+  Request,
+  UseGuards,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Pagination } from 'nestjs-typeorm-paginate';
-import { Users } from 'src/entities/users.entity';
+import { Users } from '../../entities/users.entity';
 import { CreateUserDto } from './dto/create-user.dto';
 import { GetUsersFilterDto } from './dto/get-users-filter.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UsersService } from './users.service';
-import { Request } from 'express';
+import { ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
+
+ApiTags('users');
 @Controller('users')
 export class UsersController {
   constructor(
-    private usersService: UsersService,
-    private configService: ConfigService,
+    private usersService: UsersService, // private configService: ConfigService,
   ) {}
 
+  @ApiCreatedResponse({ type: Users })
   @Post()
   @UsePipes(ValidationPipe)
   createUser(@Body() createUserDto: CreateUserDto): Promise<any> {
@@ -50,7 +54,7 @@ export class UsersController {
     @Query('page') page = 1,
     @Query('limit') limit = 10,
   ): Promise<Pagination<Users>> {
-    const baseUrl = this.configService.get('BASE_URL');
+    // const baseUrl = this.configService.get('BASE_URL');
     limit = limit > 100 ? 100 : limit;
 
     const params = filterDto;
@@ -64,7 +68,7 @@ export class UsersController {
     return this.usersService.getAllUsers(filterDto, {
       page,
       limit,
-      route: baseUrl + '/users?' + queryString,
+      route: '/users?' + queryString,
     });
   }
 
@@ -74,4 +78,3 @@ export class UsersController {
     return this.usersService.deleteMultipleUser(req);
   }
 }
-1;
